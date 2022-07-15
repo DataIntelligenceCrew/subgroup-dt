@@ -40,11 +40,11 @@ class SubgroupDT:
         collected_stats = StatTracker(self.num_groups, query.empty_copy())
         total_cost = 0.0
         while not collected_stats.is_greater(query):
-            optimal_source = None # todo
-            new_point = optimal_source.sample()
+            selected_source = self.dataset.select(policy)
+            new_point = selected_source.sample()
             unified_set.append(new_point)
             collected_stats.add_point(new_point)
-            total_cost += optimal_source.cost
+            total_cost += selected_source.cost
         return unified_set, total_cost, collected_stats
 
 if __name__ == "__main__":

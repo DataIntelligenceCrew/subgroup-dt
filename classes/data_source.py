@@ -23,6 +23,17 @@ class DataSource:
     def __getitem__(self, position):
         return self.data_sources[position]
     
+    def __str__(self):
+        s = "{Cost: " + str(self.cost) + ", Length: " + str(len(self))
+        s += ", Points: " + str(self.data_points) + ", Stats: "
+        return s + str(self.stat_tracker) + "}"
+    
+    def __repr__(self):
+        return (str(self))
+    
+    def probability(self, subgroup):
+        return self.stat_tracker[subgroup]
+    
     def add_point(self, data_point):
         if len(data_point) is not self.num_groups:
             warnings.warn("Trying to add a data point with wrong"
@@ -33,17 +44,6 @@ class DataSource:
     
     def sample(self):
         return random.choice(data_points)
-    
-    def __str__(self):
-        s = "{Cost: " + str(self.cost) + ", Length: " + str(len(self))
-        s += ", Points: " + str(self.data_points) + ", Stats: "
-        return s + str(self.stat_tracker) + "}"
-    
-    def __repr__(self):
-        return (str(self))
-    
-    def probability(self, subgroup):
-        pass
 
 def dummy_datasource(num_groups, cost, num_points):
     ds = DataSource(num_groups, cost, None)
