@@ -43,6 +43,12 @@ class Group:
     
     def __repr__(self):
         return (str(self))
+    
+    def __hash__(self):
+        return hash(self.group_membership)
+    
+    def __eq__(self, other):
+        return self.group_membership == other.group_membership
 
 # Alias Group into DataPoint as syntactic sugar
 DataPoint = Group

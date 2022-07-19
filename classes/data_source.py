@@ -32,7 +32,7 @@ class DataSource:
         return (str(self))
     
     def probability(self, subgroup):
-        return self.stat_tracker[subgroup]
+        return self.stat_tracker[subgroup] / len(self)
     
     def add_point(self, data_point):
         if len(data_point) is not self.num_groups:
@@ -43,7 +43,7 @@ class DataSource:
             self.stat_tracker.add_point(data_point)
     
     def sample(self):
-        return random.choice(data_points)
+        return random.choice(self.data_points)
 
 def dummy_datasource(num_groups, cost, num_points):
     ds = DataSource(num_groups, cost, None)
